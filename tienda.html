@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>tienda</title>
+</head>
+
+<body>
+
+  <ul id="nav1">
+    <li><img src="imagenes/magnifying-glass.png" alt="" srcset=""></li>
+    <li><img src="imagenes/shopping-cart.png"onclick="abrirCarrito()"></li>
+    <li><img src="imagenes/user.png" alt="" srcset=""></li>
+  </ul>    
+
+  <h1>Tienda</h1>
+    <p>cupon de descuento 10% <b>descuento10</b></p>
+
+    <div id="filtro">
+        <ul>
+            <button>Sillas</button>
+            <button>Mesas</button>
+            <button>Sillones</button>
+            <button>Camas</button>
+            <button>Otros</button>
+        </ul>
+    </div>
+    
+    <div id="carrito">
+      <button class="cerrar"onclick="cerrarCarrito()">✗</button>
+      <h2>Carrito</h2>
+      <li>  
+        <img class="imgCarrito" src="" alt="">
+        <p class="nombreItem">nombre del producto</p>
+        <button class="add">+</button>
+        <p class="cantidad"> 0 </p>
+        <button class="less">-</button>
+        <p>precio</p>
+        <button class="eliminar">✗</button>
+      </li>
+      <li>  
+        <img class="imgCarrito" src="" alt="">
+        <p class="nombreItem">nombre del producto</p>
+        <button class="add">+</button>
+        <p class="cantidad"> 0 </p>
+        <button class="less">-</button>
+        <p>precio</p>
+        <button class="eliminar">✗</button>
+      </li>
+      <li>  
+        <img class="imgCarrito" src="" alt="">
+        <p class="nombreItem">nombre del producto</p>
+        <button class="add">+</button>
+        <p class="cantidad"> 0 </p>
+        <button class="less">-</button>
+        <p>precio</p>
+        <button class="eliminar">✗</button>
+      </li>
+      <li>  
+        <img class="imgCarrito" src="" alt="">
+        <p class="nombreItem">nombre del producto</p>
+        <button class="add">+</button>
+        <p class="cantidad"> 0 </p>
+        <button class="less">-</button>
+        <p>precio</p>
+        <button class="eliminar">✗</button>
+      </li>
+      <div id="totales">
+        <p>Subtotal:</p> 
+        <p>Cupon de descuento</p> 
+        <p>Total:</p> 
+        <button>Confirmar compra</button>
+      </div>
+      
+    </div>
+
+    <div class="fila"> 
+        <div class="columna">
+          <img class="item-silla" src="imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg">
+          <img class="" src="imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg">
+        </div>
+        <div class="columna">
+            <img class="item-sillon" src="imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg">
+            <img class="item-mesa" src="imagenes/benjamin-voros-X63FTIZFbZo-unsplash.jpg">
+          </div>
+          <div class="columna">
+            <img class="item-silla" src="imagenes/daniil-silantev-1P6AnKDw6S8-unsplash.jpg">
+            <img class="item-silla" src="imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg">
+          </div>
+          <div class="columna">
+            <img class="item-sillon" src="imagenes/hal-gatewood-Vfml26Iy4mI-unsplash.jpg">
+            <img class="item-mesa" src="imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg">
+          </div>
+        
+      </div>
+      
+      <script src="js/muebles.js"defer></script>
+      <footer>
+      </footer>
+</body>
+</html>
