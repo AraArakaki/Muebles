@@ -7,60 +7,40 @@
 // }
 //  mensaje(); 
  
-class Mueble {
-    constructor(prod) {
-        this.categoria = productos.categoria;
-        this.nombre = productos.nombre;
-        this.precio = productos.precio;
-    }
-} 
-const carrito=[];
+
+let carrito=[];
 
 //Listado con todos los productos
 const productos=[
-  {categoria:"silla", nombre:"sahan",precio:6000},
-  {categoria:"silla", nombre:"anton",precio:5000},
-  {categoria:"silla", nombre:"bizet",precio:4000},
-  {categoria:"silla", nombre:"belio",precio:3000},
-  {categoria:"silla", nombre:"suria",precio:2000},
-
-  {categoria:"mesa", nombre:"sahan",precio:6000},
-  {categoria:"mesa", nombre:"anton",precio:5000},
-  {categoria:"mesa", nombre:"bizet",precio:4000},
-  {categoria:"mesa", nombre:"belio",precio:3000},
-  {categoria:"mesa", nombre:"suria",precio:2000},
-
-  {categoria:"cama", nombre:"sahan",precio:6000},
-  {categoria:"cama", nombre:"anton",precio:5000},
-  {categoria:"cama", nombre:"bizet",precio:4000},
-  {categoria:"cama", nombre:"belio",precio:3000},
-  {categoria:"cama", nombre:"suria",precio:2000},
-
-  {categoria:"sillon", nombre:"sahan",precio:6000},
-  {categoria:"sillon", nombre:"anton",precio:5000},
-  {categoria:"sillon", nombre:"bizet",precio:4000},
-  {categoria:"sillon", nombre:"belio",precio:3000},
-  {categoria:"sillon", nombre:"suria",precio:2000},
-
-  {categoria:"lampara", nombre:"sahan",precio:6000},
-  {categoria:"lampara", nombre:"anton",precio:5000},
-  {categoria:"lampara", nombre:"bizet",precio:4000},
-  {categoria:"lampara", nombre:"belio",precio:3000},
-  {categoria:"lampara", nombre:"suria",precio:2000},
+  {id:"1", categoria:"silla ", nombre:"sahan",precio:6000, img: 'imagenes/daniil-silantev-1P6AnKDw6S8-unsplash.jpg'},
+  {id:"2", categoria:"silla", nombre:"anton",precio:5000, img: 'imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg'},
+  
+  {id:"3", categoria:"mesa", nombre:"sahan",precio:6000, img: 'imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg'},
+  {id:"3", categoria:"mesa", nombre:"anton",precio:6000, img: 'imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg'}, 
+  
+  {id:"3", categoria:"sillon", nombre:"sahan",precio:6000, img: 'imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg'},  
+  {id:"3", categoria:"sillon", nombre:"anton",precio:6000, img: 'imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg'},
+  
+  {id:"3", categoria:"lampara", nombre:"sahan",precio:6000, img: 'imagenes/hal-gatewood-Vfml26Iy4mI-unsplash.jpg'},  
+  {id:"3", categoria:"lampara", nombre:"anton",precio:6000, img: 'imagenes/hal-gatewood-Vfml26Iy4mI-unsplash.jpg'},
+  
+  {id:"3", categoria:"otros", nombre:"sahan",precio:6000, img: 'imagenes/benjamin-voros-X63FTIZFbZo-unsplash.jpg'},
+  {id:"3", categoria:"otros", nombre:"anton",precio:6000, img: 'imagenes/hal-gatewood-Vfml26Iy4mI-unsplash.jpg'},
+  
 ];
 
-// // Muestra el listado total de productos
-productos.forEach((prod)=>{
-  console.log(prod.categoria+" "+prod.nombre+ " $ "+prod.precio)
-});
+// Muestra el listado total de productos
+// productos.forEach((prod)=>{
+//   console.log(prod.categoria+" "+prod.nombre+ " $ "+prod.precio)
+// });
 
 
-// Buscar categoria (Tipo de mueble) 
-let categoria= prompt("que categoria esta buscando");
-const filtroCategoria = productos.filter((productos)=> {
-  return productos.categoria === categoria
-})
-console.log(filtroCategoria);
+// // Buscar categoria (Tipo de mueble) 
+// let categoria= prompt("que categoria esta buscando");
+// const filtroCategoria = productos.filter((productos)=> {
+//   return productos.categoria === categoria
+// })
+// console.log(filtroCategoria);
 
 // Buscar (para search bar)
 // let item = prompt("Busqueda");
@@ -69,19 +49,20 @@ console.log(filtroCategoria);
 // })
 // console.log(busqueda);
 
-   
-let itemSelect= prompt("Ingrese el nombre del producto");
-const agregarItem= filtroCategoria.filter((productos)=>{
-  return filtroCategoria.nombre === itemSelect;
-})
-carrito.push(agregarItem);
-console.log(carrito);
+
+// let itemSelect= prompt("Ingrese el nombre del producto");
+// const agregarItem= filtroCategoria.filter((productos)=>{
+//   return filtroCategoria.nombre === itemSelect;
+// })
+// carrito.push(agregarItem);
+// alert(carrito);
+
 
 //Suma de todos los productos del array carrito
-const total = carrito.reduce ((subtotal, producto)=>{
-  return producto.precio + subtotal
-}, 0)
-console.log(total)
+// const total = carrito.reduce ((subtotal, producto)=>{
+//   return producto.precio + subtotal
+// }, 0)
+// console.log(total)
 
 // let subtotal=0;
 // // //Agregar otro item
@@ -140,16 +121,38 @@ console.log(total)
 // alert(nombreUsuario +' muchas gracias por tu compra');
 
 
-// Eventos
-// let boton =
-// document.getElementById("carrito")
-//   boton.onclick = () => {$("carrito").style.right='0'};
+// DOM
+for (const producto of productos){
+ 
+  let contenedor = document.getElementById("galeria");
+  let item= document.createElement ("div");
+  let itemImagen= document.createElement('img');
+  itemImagen.setAttribute('src',producto.img);
+  item.innerHTML = `    
+                    <h3> ${producto.categoria} ${producto.nombre} </h3>
+                    <p> $ ${producto.precio}</p>
+                    <button>agregar al carrito</button>`;
+  item.appendChild(itemImagen);
+  contenedor.appendChild(item);
+}
 
-  
+let parrafo = document.createElement("p");
+parrafo.innerHTML= "<p>cupon de descuento 10% <b>descuento10</b></p>";
+document.body.append(parrafo);
+
+// Eventos
+
+const btnabrir = document.querySelector(".abrir");
+btnabrir.onclick = function() {abrirCarrito()};
 function abrirCarrito() {
   document.getElementById("carrito").style.right = "0";
 }
 
+const btncerrar = document.querySelector(".cerrar");
+btncerrar.onclick = function() {cerrarCarrito()};
 function cerrarCarrito() {
   document.getElementById("carrito").style.right = "-70vw";
+
 }
+
+
