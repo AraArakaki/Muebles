@@ -18,14 +18,29 @@ body{
 
 header{
     grid-area:header;
+    padding-top:2rem;
+}
+.pDesc{
+    background-color:rgba(0, 0, 0, 0.89);
+    color:white;
+    padding:.5rem;
 }
 
+.pDesc span{
+    font-weight: bolder;
+}
 main{
     grid-area:main;
+    padding:2rem;
 }
 
 footer{
+    display:flex;
+    align-items: center;
+    justify-content: center;
     grid-area:footer;
+    height:100px;
+    border-top:1px solid rgba(0, 0, 0, 0.062);
 }
 
 
@@ -37,25 +52,30 @@ footer{
   padding: 0 4px;
   width:80vw;
   margin:auto;
-  gap:2rem;
+  row-gap:2.2rem;
 }
 
 #galeria div {
-    border:.5px solid rgb(221, 220, 220);
+    /* border:.5px solid rgb(221, 220, 220); */
+    box-shadow:0 5px 5px 5px rgba(221, 218, 218, 0.151);
     display:flex;
     flex-direction: column;
     height:auto;
-    width:15vw;
+    width:18vw;
 }
 
 #galeria img{
-    width:100%;
-    height:350px;
+    width:18vw;
+    height:250px;
     object-fit:cover;
 }
 
 h3{
     text-transform: uppercase;
+}
+
+.precioCaja{
+    margin:0;
 }
 
 #filtro ul{
@@ -81,12 +101,12 @@ h1{
 
 /* off canvas menu carrito */
 #carrito{
-    background-color: white;
+    background-color: rgb(244, 236, 236);
     position:fixed;
     top:0;
-    right:-70vw;
-    width:70vw;
-    height:100vh;
+    right:-50vw;
+    width:50vw;
+    height:100%;
     z-index: 1;
     padding:3rem;
     overflow:scroll;
@@ -108,20 +128,24 @@ h1{
     border-radius: 5px;
 }
 #carrito{
-    display: flex;
-    flex-direction:column;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
     gap: 1rem;
+    box-shadow:-5px -9px 10px rgba(27, 25, 25, 0.123);
+    align-content: start;
 }
 #carrito li{
     display:flex;
     flex-direction: row;
     gap: 1rem;
     align-items:center;
-    border-bottom: 1px solid black;
-    padding-bottom:1rem;
-    width:70%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+    padding:1rem;
+    width:90%;
     justify-content: space-between;
 }
+
 .nombreItem{
     text-transform: uppercase;
     font-weight: bold;
@@ -146,7 +170,6 @@ h1{
     border:.5px solid rgb(182, 179, 179);
     padding:.5rem;
 }
-
 
 #nav1{
     display:flex;

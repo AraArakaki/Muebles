@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>tienda</title>
+    <title>tienda de Muebles</title>
     <script src="js/muebles.js" async></script>
 
 </head>
 
 <body>
   
-  <header>
+  <header id="top">
     <ul id="nav1">
       <li><img class = "buscar"src="imagenes/magnifying-glass.png" alt="" srcset=""></li>
       <li><img class = "abrir" src="imagenes/shopping-cart.png"></li>
       <li><img src="imagenes/user.png" alt="" srcset=""></li>
     </ul>    
   
-    <h1>Tienda</h1>
+    <h1>Tienda de Muebles</h1>
       <!-- <p>cupon de descuento 10% <b>descuento10</b></p> -->
   
       <div id="filtro">
           <ul>
-              <button class="silla">Sillas</button>
+              <button id="silla">Sillas</button>
               <button>Mesas</button>
               <button>Sillones</button>
               <button>Camas</button>
@@ -38,47 +38,16 @@
       <div id="carrito">
         <button class="cerrar">✗</button>
         <h2>Carrito</h2>
-        <li>  
-          <img class="imgCarrito" src="" alt="">
-          <p class="nombreItem">nombre del producto</p>
-          <button class="add">+</button>
-          <p class="cantidad"> 0 </p>
-          <button class="less">-</button>
-          <p>precio</p>
-          <button class="eliminar">✗</button>
-        </li>
-        <li>  
-          <img class="imgCarrito" src="" alt="">
-          <p class="nombreItem">nombre del producto</p>
-          <button class="add">+</button>
-          <p class="cantidad"> 0 </p>
-          <button class="less">-</button>
-          <p>precio</p>
-          <button class="eliminar">✗</button>
-        </li>
-        <li>  
-          <img class="imgCarrito" src="" alt="">
-          <p class="nombreItem">nombre del producto</p>
-          <button class="add">+</button>
-          <p class="cantidad"> 0 </p>
-          <button class="less">-</button>
-          <p>precio</p>
-          <button class="eliminar">✗</button>
-        </li>
-        <li>  
-          <img class="imgCarrito" src="" alt="">
-          <p class="nombreItem">nombre del producto</p>
-          <button class="add">+</button>
-          <p class="cantidad"> 0 </p>
-          <button class="less">-</button>
-          <p>precio</p>
-          <button class="eliminar">✗</button>
-        </li>
+        
+        <div id = "cart">
+
+        </div>
+        
         <div id="totales">
           <p>Subtotal:</p> 
           <p>Cupon de descuento</p> 
           <p>Total:</p> 
-          <button>Confirmar compra</button>
+          <button class="confirmar">Confirmar compra</button>
         </div>
         
       </div>
@@ -90,6 +59,7 @@
  
       
   <footer>
+    Todos los derechos reservados 2022
   </footer>
 </body>
 </html>
