@@ -1,10 +1,7 @@
 
 
-function mensaje() {
-  let mensaje = "Desea suscribirse para recibir ofertas?";
-  alert(mensaje);
-}
- mensaje(); 
+// let mensaje = () => alert ("Desea suscribirse para recibir ofertas?");
+// mensaje();
  
 //Elemento creado desde js 
 let barra= document.getElementById('top');
@@ -16,22 +13,17 @@ barra.appendChild(parrafo);
 
 // Boton para abrir/cerrar carrito
 const btnabrir = document.querySelector(".abrir");
-btnabrir.onclick = function() {abrirCarrito()};
-function abrirCarrito() {
-  document.getElementById("carrito").style.right = "0";
-}
+btnabrir.onclick = () => abrirCarrito();
+let abrirCarrito = () => document.getElementById("carrito").style.right = "0";
 
 const btncerrar = document.querySelector(".cerrar");
-btncerrar.onclick = function() {cerrarCarrito()};
-function cerrarCarrito() {
-  document.getElementById("carrito").style.right = "-50vw";
-}
+btncerrar.onclick = () => cerrarCarrito();
+let cerrarCarrito = () => document.getElementById("carrito").style.right = "-50vw";
 
 const btnconfirmar = document.querySelector(".confirmar");
-btnconfirmar.onclick = function() {thxByuy()};
-function thxByuy() {
-  alert("gracias por tu compra");
-}
+btnconfirmar.onclick = () => thxByuy();
+let thxByuy = () => alert("Gracias por tu compra");
+
 
 let carrito=[];
 
@@ -66,7 +58,7 @@ productos.forEach((producto, indice)=>{
 
   let imagenCaja= document.createElement('img');
   imagenCaja.setAttribute('src', producto.img);
-  imagenCaja.classList.add("img")
+  // imagenCaja.classList.add("img")
 
   let nombreCaja= document.createElement('h3');
   nombreCaja.textContent=  `${producto.categoria} ${producto.nombre}`;
@@ -91,7 +83,7 @@ productos.forEach((producto, indice)=>{
 function addItem(evento){
   var btnAdd = evento.target;
   var comprarItem= btnAdd.parentElement
-  var img= comprarItem.getElementsByTagName('img')[0].innerHTML
+  var img= comprarItem.getElementsByTagName('img')[0].src
   var nombre=comprarItem.getElementsByTagName('h3')[0].innerText
   var precio=comprarItem.getElementsByTagName('p')[0].innerText
   agregarItemCar(img, nombre, precio);
@@ -109,11 +101,16 @@ function agregarItemCar(img, nombre, precio){
                         <p>${precio}</p>
                         <button class="eliminar">✗</button>
                                                             `
-  
   carro.appendChild(carroItem);
+  carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
+  carroItem.getElementsByClassName('less')[0].addEventListener('click', itemMenos)
+
 }
 
-
+function quitarItem(evento){
+  var btnclick = evento.target
+  btnclick.parentElement.remove()
+}
 
 
 
