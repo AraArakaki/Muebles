@@ -196,3 +196,41 @@ h1{
 #nav1 li img:hover{
     background-color: rgb(177, 238, 245);
 }
+
+
+/* FORMULARIO */
+
+form{
+    width:50vw;
+    height:50vh;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: left;
+}
+form input{
+    height:3rem;
+    font-size: .8rem;
+    font-family: monospace;
+    padding:1rem;
+    /* border-radius: 3px; */
+}
+form label{
+    text-transform: uppercase;
+    padding: 2rem 0 .5rem .5rem;
+}
+
+#btnEnviar , .btnBorrar {
+    width:30%;
+    font-family: monospace;
+    border:1px solid rgba(128, 128, 128, 0.671);
+    background-color: black;
+    color: white;
+    margin-top:1rem;
+}
+
+
+#campoRequerido p{
+    color:red;
+}

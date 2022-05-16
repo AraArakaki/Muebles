@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <title>Formulario de envio</title>
+</head>
+<body>
+    <header>
+        <h2>Datos del Envio</h2>
+    </header>
+    <main>
+
+        <form>
+            <label for="nombre"> Nombre</label>
+            <input type="text" id="nombre" placeholder="Ingrese su Nombre" >
+
+            <label for="telefono" >Telefono</label>
+            <input type="text" id="telefono" placeholder="Ingrese su Nombre" >
+
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Ingrese su Email" >
+
+            <label for="direccion">Direccion</label>
+            <input type="text"  id="direccion" placeholder="Ingrese su Direccion" >
+
+            <label for="localidad">Localidad</label>
+            <input type="select" id="localidad" placeholder="Ingrese su Localidad">
+
+            <input type="submit" id="btnEnviar" value="enviar">
+
+            <!-- <button type= "button" id="btnEnviar">Enviar</button>
+            <button type= "reset" class="btnBorrar">Borrar</button> -->
+
+        </form>
+        <div id="campoRequerido">
+            
+        </div>
+    </main>
+
+    <script src="../js/formulario.js" ></script>
+</body>
+</html>

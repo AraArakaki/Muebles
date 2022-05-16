@@ -93,39 +93,75 @@ function addItem(evento){
 function agregarItemCar(img, nombre, precio){
   var carro= document.querySelector('#cart');
   var carroItem= document.createElement('li');
+
+  var cartItemNames = carroItem.getElementsByTagName('h3')
+  for (var i = 0; i < cartItemNames.length; i++) {
+      if (cartItemNames[i].innerText == nombre) {
+          alert('This item is already added to the cart')
+          return}
+        }
+      
   carroItem.innerHTML= `
                         <img class="imgCarrito" src="${img}" alt="">
                         <p class="nombreItem">${nombre}</p>
                         <button class="add">+</button>
-                        <p class="cantidad"> 0 </p>
+                        <p class="cantidad">  </p>
                         <button class="less">-</button>
-                        <p>${precio}</p>
+                        <p class="precioI">${precio}</p>
                         <button class="eliminar">✗</button>
                                                             `
   carro.appendChild(carroItem);
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
-  carroItem.getElementsByClassName('less')[0].addEventListener('click', itemMenos)
- 
+  carroItem.getElementsByClassName('cantidad')[0].addEventListener('change', cantidades)
+  actualizarCarrito ()
 }
+
+var cantidadIn = document.getElementsByClassName('cantidad')
+  for (var i =  0; i < cantidadIn.length; i++) {
+    var input = cantidadIn[i]
+    input.addEventListener('change', cantidades)
+  }
+
+function cantidades(evento) {
+  var input = evento.target
+  if (input==0){
+    input.value = 1
+  }
+  actualizarCarrito ()
+}
+
+
 
 function quitarItem(evento){
   var btnclick = evento.target
   btnclick.parentElement.remove()
-}
-
-function itemMenos(evento){
-  var btnMenos = evento.target
-  btnMenos
+  
+  actualizarCarrito ()
 }
 
 
+function actualizarCarrito (){
+  var carroItem = document.getElementsByTagName('li')
+  
+  var total=0
+  for (var i =0; i> carroItem.length; i++){
+    var carroItems = carroItem[i]
+    var precioItem = carroItems.document.getElementsByClassName('precioI')[0]
+    var cantItem = carroItems.document.getElementsByClassName('cantidad')[0]
+    var precioCarrito= parseFloat(precioItem.innerText(''))
+    var cant = cantItem.value
+    total= total+ (precioCarrito * cant) 
+  }
+  total = Math.round(total*100)/100
+  document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+total
+}
 
 
 // // Buscar categoria (Tipo de mueble) 
 // let categoria= prompt("que categoria esta buscando");
 // const filtroCategoria = productos.filter((productos)=> {
 //   return productos.categoria === categoria
-// })
+// })   
 
 
 // let itemSelect= prompt("Ingrese el nombre del producto");
