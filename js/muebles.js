@@ -105,8 +105,7 @@ function agregarItemCar(img, nombre, precio){
   carro.appendChild(carroItem);
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
   carroItem.getElementsByClassName('less')[0].addEventListener('click', itemMenos)
-  carrito.push(carroItem)
-alert(carrito)
+ 
 }
 
 function quitarItem(evento){
