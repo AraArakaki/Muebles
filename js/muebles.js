@@ -87,6 +87,7 @@ function addItem(evento){
   var nombre=comprarItem.getElementsByTagName('h3')[0].innerText
   var precio=comprarItem.getElementsByTagName('p')[0].innerText
   agregarItemCar(img, nombre, precio);
+
 }
 
 function agregarItemCar(img, nombre, precio){
@@ -104,7 +105,8 @@ function agregarItemCar(img, nombre, precio){
   carro.appendChild(carroItem);
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
   carroItem.getElementsByClassName('less')[0].addEventListener('click', itemMenos)
-
+  carrito.push(carroItem)
+alert(carrito)
 }
 
 function quitarItem(evento){
@@ -112,7 +114,10 @@ function quitarItem(evento){
   btnclick.parentElement.remove()
 }
 
-
+function itemMenos(evento){
+  var btnMenos = evento.target
+  btnMenos
+}
 
 
 
