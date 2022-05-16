@@ -202,7 +202,7 @@ h1{
 
 form{
     width:50vw;
-    height:50vh;
+    height:auto;
     margin:auto;
     display: flex;
     flex-direction: column;
@@ -210,7 +210,7 @@ form{
     text-align: left;
 }
 form input{
-    height:3rem;
+    height:2rem;
     font-size: .8rem;
     font-family: monospace;
     padding:1rem;
@@ -224,7 +224,6 @@ form label{
 #btnEnviar , .btnBorrar {
     width:30%;
     font-family: monospace;
-    border:1px solid rgba(128, 128, 128, 0.671);
     background-color: black;
     color: white;
     margin-top:1rem;
@@ -232,5 +231,12 @@ form label{
 
 
 #campoRequerido p{
-    color:red;
+    background-color:rgb(108, 185, 199);
+    color:white;
+    text-align: center;
+    padding:1rem;
+}
+
+.inputRequired{
+    border: 2px solid rgb(108, 185, 199);
 }

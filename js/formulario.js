@@ -1,35 +1,40 @@
 function validarForm () {
-    let nombre = document.getElementById("nombre").value;
-    // let telefono= document.getElementById("telefono").value;
-    // let direccion = document.getElementById("direccion").value;
-    // let email = document.getElementById("email").value;
-    // let localidad= document.getElementById("localidad").value;
+    let nombre = document.getElementById("nombre");
+    let telefono= document.getElementById("telefono");
+    let direccion = document.getElementById("direccion");
+    let email = document.getElementById("email");
+    let localidad= document.getElementById("localidad");
     let campoRequerido= document.getElementById("campoRequerido");
    
-    if (nombre == ""){
-        campoRequerido.innerHtml= `<p> Campos requeridos (*) </p>`
-        // return false;
+    if (nombre.value == ""){
+        campoRequerido.innerHTML= "<p>Campos requeridos s </p"
+        nombre.classList.add("inputRequired")
+        return false;
     } else {campoRequerido.innerHTML= "";}
 
-    // if (telefono.length == 0){
-    //     campoRequerido.innerHtml= `<p> Campos requeridos (*) </p>`
-    //     // return false;
-    // } else {campoRequerido.innerHTML= "";}
+    if (telefono.value.length == 0){
+        campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
+        telefono.classList.add("inputRequired")
+        return false;
+    } else {campoRequerido.innerHTML= "";}
     
-    // if (email.length == 0){
-    //     campoRequerido.innerHtml= `<p> Campos requeridos (*) </p>`
-    //     // return false;
-    // } else {campoRequerido.innerHTML= "";}
+    if (email.value.length == 0){
+        campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
+        email.classList.add("inputRequired")
+        return false;
+    } else {campoRequerido.innerHTML= "";}
 
-    // if (direccion.length == 0){
-    //     campoRequerido.innerHtml= `<p> Campos requeridos (*) </p>`
-    //     // return false;
-    // } else {campoRequerido.innerHTML= "";}
+    if (direccion.value.length == 0){
+        campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
+        direccion.classList.add("inputRequired")
+        return false;
+    } else {campoRequerido.innerHTML= "";}
 
-    // if (localidad.length == 0){
-    //     campoRequerido.innerHtml= `<p> Campos requeridos (*) </p>`
-    //     // return false;
-    // } else {campoRequerido.innerHTML= "";}
+    if (localidad.value.length == 0){
+        campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
+        localidad.classList.add("inputRequired")
+        return false;
+    } else {campoRequerido.innerHTML= "";}
 }
 
 document.getElementById("btnEnviar").addEventListener('click', validarForm);
