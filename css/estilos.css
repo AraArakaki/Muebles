@@ -214,7 +214,8 @@ h1{
 /* FORMULARIO */
 
 form{
-    width:50vw;
+    min-width:200px;
+    max-width: 500px;
     height:auto;
     margin:auto;
     display: flex;
@@ -234,8 +235,8 @@ form label{
     padding: 2rem 0 .5rem .5rem;
 }
 
-#btnEnviar , .btnBorrar {
-    width:30%;
+#btnEnviar , #btnLimpiar {
+    width:17%;
     font-family: monospace;
     background-color: black;
     color: white;
@@ -256,4 +257,7 @@ form label{
 
 a{
     color:black;
+    padding:2rem;
+    text-decoration: none;
+    display:inline-block;
 }

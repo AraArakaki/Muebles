@@ -80,12 +80,14 @@ productos.forEach((producto, indice)=>{
 });
 
 
+
 function addItem(evento){
   var btnAdd = evento.target;
   var comprarItem= btnAdd.parentElement
   var img= comprarItem.getElementsByTagName('img')[0].src
   var nombre=comprarItem.getElementsByTagName('h3')[0].innerText
   var precio=comprarItem.getElementsByTagName('p')[0].innerText
+  
   agregarItemCar(img, nombre, precio);
 
 }
@@ -93,11 +95,12 @@ function addItem(evento){
 function agregarItemCar(img, nombre, precio){
   var carro= document.querySelector('#cart');
   var carroItem= document.createElement('li');
+  var cantidad= document.getElementsByClassName('cantidad');
 
-  var cartItemNames = carroItem.getElementsByTagName('h3')
-  for (var i = 0; i < cartItemNames.length; i++) {
-      if (cartItemNames[i].innerText == nombre) {
-          alert('This item is already added to the cart')
+  var itemNombre = carroItem.getElementsByTagName('h3')
+  for (var i = 0; i < itemNombre.length; i++) {
+      if (itemNombre[i].innerText == nombre) {
+          cantidad.value++
           return}
         }
       
@@ -105,7 +108,7 @@ function agregarItemCar(img, nombre, precio){
                         <img class="imgCarrito" src="${img}" alt="">
                         <p class="nombreItem">${nombre}</p>
                         <button class="add">+</button>
-                        <p class="cantidad">  </p>
+                        <input class="cantidad" type="number" value="1">  
                         <button class="less">-</button>
                         <p class="precioI">${precio}</p>
                         <button class="eliminar">✗</button>
@@ -113,7 +116,7 @@ function agregarItemCar(img, nombre, precio){
   carro.appendChild(carroItem);
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
   carroItem.getElementsByClassName('cantidad')[0].addEventListener('change', cantidades)
-  actualizarCarrito ()
+  actualizarCarrito();
 
   // var iconoShop= document.getElementById("shop-cart")
   // iconoShop.innerHTML= carroItem.length
@@ -127,10 +130,10 @@ var cantidadIn = document.getElementsByClassName('cantidad')
 
 function cantidades(evento) {
   var input = evento.target
-  if (input==0){
+  if (input == 0){
     input.value = 1
   }
-  actualizarCarrito ()
+  actualizarCarrito()
 }
 
 
@@ -139,26 +142,27 @@ function quitarItem(evento){
   var btnclick = evento.target
   btnclick.parentElement.remove()
   
-  actualizarCarrito ()
+  actualizarCarrito()
 }
 
 
-function actualizarCarrito (){
+function actualizarCarrito(){
   var carroItem = document.getElementsByTagName('li')
   
-  var total=0
-  for (var i =0; i> carroItem.length; i++){
+  var total = 0
+  for (var i = 0; i > carroItem.length; i++){
     var carroItems = carroItem[i]
     var precioItem = carroItems.document.getElementsByClassName('precioI')[0]
     var cantItem = carroItems.document.getElementsByClassName('cantidad')[0]
     var precioCarrito= parseFloat(precioItem.innerText(''))
     var cant = cantItem.value
-    total= total+ (precioCarrito * cant) 
+    total = total+ (precioCarrito * cant) 
   }
   total = Math.round(total*100)/100
-  document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+total
+  document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+ total
 
 }
+
 
 
 // // Buscar categoria (Tipo de mueble) 
