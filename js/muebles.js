@@ -12,7 +12,7 @@ barra.appendChild(parrafo);
 
 
 // Boton para abrir/cerrar carrito
-const btnabrir = document.querySelector(".abrir");
+const btnabrir = document.querySelector("#abrirCart");
 btnabrir.onclick = () => abrirCarrito();
 let abrirCarrito = () => document.getElementById("carrito").style.right = "0";
 
@@ -114,6 +114,9 @@ function agregarItemCar(img, nombre, precio){
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
   carroItem.getElementsByClassName('cantidad')[0].addEventListener('change', cantidades)
   actualizarCarrito ()
+
+  // var iconoShop= document.getElementById("shop-cart")
+  // iconoShop.innerHTML= carroItem.length
 }
 
 var cantidadIn = document.getElementsByClassName('cantidad')
@@ -154,6 +157,7 @@ function actualizarCarrito (){
   }
   total = Math.round(total*100)/100
   document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+total
+
 }
 
 

@@ -3,22 +3,18 @@ function validarForm () {
     let telefono= document.getElementById("telefono");
     let direccion = document.getElementById("direccion");
     let email = document.getElementById("email");
-    let localidad= document.getElementById("localidad");
     let campoRequerido= document.getElementById("campoRequerido");
    
-    if (nombre.value == ""){
-        campoRequerido.innerHTML= "<p>Campos requeridos s </p"
-        nombre.classList.add("inputRequired")
-        return false;
-    } else {campoRequerido.innerHTML= "";}
+    nombre.value == ""? (campoRequerido.innerHTML= "<p>Campos requeridos (*) </p")
+       ( nombre.classList.add("inputRequired")) : (campoRequerido.innerHTML= "");
 
-    if (telefono.value.length == 0){
+    if ((telefono.value.length < 14 )||(isNaN(telefono.value))){
         campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
         telefono.classList.add("inputRequired")
         return false;
     } else {campoRequerido.innerHTML= "";}
     
-    if (email.value.length == 0){
+    if ((email.value.length == 0) || (!email.value.includes("@"))||(!email.value.includes(".com"))){
         campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
         email.classList.add("inputRequired")
         return false;
@@ -30,11 +26,9 @@ function validarForm () {
         return false;
     } else {campoRequerido.innerHTML= "";}
 
-    if (localidad.value.length == 0){
-        campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
-        localidad.classList.add("inputRequired")
-        return false;
-    } else {campoRequerido.innerHTML= "";}
-}
+
+    alert("Formulario enviado")
+    document.getElementsByTagName("input").value.innerText="";
+}   
 
 document.getElementById("btnEnviar").addEventListener('click', validarForm);
