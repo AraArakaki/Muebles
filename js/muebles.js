@@ -50,7 +50,8 @@ const productos=[
 
 
 //Mostrar todos los productos
-productos.forEach((producto, indice)=>{
+
+productos.forEach((producto)=>{
 
   const contenedor= document.getElementById("galeria");
   
@@ -61,16 +62,15 @@ productos.forEach((producto, indice)=>{
   // imagenCaja.classList.add("img")
 
   let nombreCaja= document.createElement('h3');
-  nombreCaja.textContent=  `${producto.categoria} ${producto.nombre}`;
+  nombreCaja.textContent=`${producto.categoria} ${producto.nombre}`;
 
   let precio= document.createElement('p');
-  precio.classList.add('precioCaja');
-  precio.textContent= `$${producto.precio}`;
+  precio.textContent= `$  ${producto.precio}`;
 
   let botonAddCarrito= document.createElement('button');
   botonAddCarrito.textContent='Agregar al Carrito';
   botonAddCarrito.classList.add('botonAddItem'); 
-  botonAddCarrito.addEventListener('click', addItem);
+  botonAddCarrito.addEventListener('click', AgregarCarrito);
   
   contenedor.appendChild(caja);
   caja.appendChild(imagenCaja);
@@ -81,61 +81,46 @@ productos.forEach((producto, indice)=>{
 
 
 
-function addItem(evento){
+function AgregarCarrito(evento){
   var btnAdd = evento.target;
   var comprarItem= btnAdd.parentElement
   var img= comprarItem.getElementsByTagName('img')[0].src
   var nombre=comprarItem.getElementsByTagName('h3')[0].innerText
   var precio=comprarItem.getElementsByTagName('p')[0].innerText
-  
-  agregarItemCar(img, nombre, precio);
 
+  agregarCarrito(img, nombre, precio);
 }
 
-function agregarItemCar(img, nombre, precio){
-  var carro= document.querySelector('#cart');
-  var carroItem= document.createElement('li');
-  var cantidad= document.getElementsByClassName('cantidad');
+function agregarCarrito( img, nombre, precio){
 
-  var itemNombre = carroItem.getElementsByTagName('h3')
-  for (var i = 0; i < itemNombre.length; i++) {
-      if (itemNombre[i].innerText == nombre) {
-          cantidad.value++
-          return}
-        }
-      
-  carroItem.innerHTML= `
+  var carro = document.querySelector('#cart');
+  var carroItem = document.createElement('li');
+    
+  carroItem.innerHTML+= `
                         <img class="imgCarrito" src="${img}" alt="">
                         <p class="nombreItem">${nombre}</p>
                         <button class="add">+</button>
-                        <input class="cantidad" type="number" value="1">  
+                        <input class="cantidad" type="number" value="1">
                         <button class="less">-</button>
                         <p class="precioI">${precio}</p>
                         <button class="eliminar">✗</button>
                                                             `
   carro.appendChild(carroItem);
   carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
-  carroItem.getElementsByClassName('cantidad')[0].addEventListener('change', cantidades)
+  
   actualizarCarrito();
 
-  // var iconoShop= document.getElementById("shop-cart")
+  // var iconoShop = document.getElementById("shop-cart")
   // iconoShop.innerHTML= carroItem.length
 }
 
-var cantidadIn = document.getElementsByClassName('cantidad')
-  for (var i =  0; i < cantidadIn.length; i++) {
-    var input = cantidadIn[i]
-    input.addEventListener('change', cantidades)
-  }
-
-function cantidades(evento) {
-  var input = evento.target
-  if (input == 0){
-    input.value = 1
-  }
-  actualizarCarrito()
-}
-
+// function cantidades(evento) {
+//   var input = evento.target
+//   if (input == 0){
+//     input.value = 1
+//   }
+//   actualizarCarrito()
+// }
 
 
 function quitarItem(evento){
@@ -147,82 +132,28 @@ function quitarItem(evento){
 
 
 function actualizarCarrito(){
-  var carroItem = document.getElementsByTagName('li')
+  var carroItem = document.getElementById('cart')
   
   var total = 0
   for (var i = 0; i > carroItem.length; i++){
     var carroItems = carroItem[i]
     var precioItem = carroItems.document.getElementsByClassName('precioI')[0]
     var cantItem = carroItems.document.getElementsByClassName('cantidad')[0]
-    var precioCarrito= parseFloat(precioItem.innerText(''))
+    var precioItem = parseFloat(precioItem.innerText(''))
     var cant = cantItem.value
-    total = total+ (precioCarrito * cant) 
+    total = total + (precioItem * cant) 
   }
-  total = Math.round(total*100)/100
   document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+ total
-
 }
 
+ 
 
 
-// // Buscar categoria (Tipo de mueble) 
-// let categoria= prompt("que categoria esta buscando");
-// const filtroCategoria = productos.filter((productos)=> {
-//   return productos.categoria === categoria
-// })   
+
+ 
 
 
-// let itemSelect= prompt("Ingrese el nombre del producto");
-// const agregarItem= filtroCategoria.filter((productos)=>{
-//   return filtroCategoria.nombre === itemSelect;
-// })
-// carrito.push(agregarItem);
-// console.log(carrito);
 
 
-//Suma de todos los productos del array carrito
-// const total = carrito.reduce ((subtotal, producto)=>{
-//   return producto.precio + subtotal
-// }, 0)
-// console.log(total)
 
-// }
-
-// //METODO DE PAGO
-// let total=0;
-// let metodoPago= prompt("Cual es tu metodo de pago Efectivo Debito Credito o Transeferencia Bancaria").toLowerCase();
-// if (metodoPago == 'efectivo'){
-//   total= (subtotal - (subtotal* 0.10))
-// } else if(metodoPago == 'credito') {
-//   total= (subtotal + (subtotal* 0.10));
-// } else {
-//   total= subtotal;
-// }
-
-// alert("su pago total en "+ metodoPago + " $ "+ total);
-
-
-// //CUPON DESCUENTO
-// let cupon;
-
-// while (cupon !== "DESCUENTO10") {
-//   cupon = prompt("Tiene un cupon de descuento? Ingrese su cupon");
-//   if (cupon === null) {
-//     alert("Su Total $" + total);
-
-//     break;
-//   } else if (cupon !== "DESCUENTO10") {
-//     if (
-//       confirm("no existe el cupon " + cupon)
-//     ) {
-//       continue;
-//     } else {
-//       cupon = null;
-//       break;
-//     }
-//   } else {
-//     alert("Tiene 10% de descuento \n Su nuevo Total $" + (total - ( total * 0.10)));
-//     break;
-//   }
-// }
 
