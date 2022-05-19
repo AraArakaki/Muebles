@@ -25,7 +25,6 @@ btnconfirmar.onclick = () => thxByuy();
 let thxByuy = () => alert("Gracias por tu compra");
 
 
-let carrito=[];
 
 //Listado con todos los productos
 const productos=[
@@ -47,8 +46,6 @@ const productos=[
   
 ];
 
-
-
 //Mostrar todos los productos
 
 productos.forEach((producto)=>{
@@ -65,7 +62,7 @@ productos.forEach((producto)=>{
   nombreCaja.textContent=`${producto.categoria} ${producto.nombre}`;
 
   let precio= document.createElement('p');
-  precio.textContent= `$  ${producto.precio}`;
+  precio.textContent= `$${producto.precio}`;
 
   let botonAddCarrito= document.createElement('button');
   botonAddCarrito.textContent='Agregar al Carrito';
@@ -80,48 +77,39 @@ productos.forEach((producto)=>{
 });
 
 
-
-function AgregarCarrito(evento){
+function AgregarCarrito(evento, id){
   var btnAdd = evento.target;
   var comprarItem= btnAdd.parentElement
   var img= comprarItem.getElementsByTagName('img')[0].src
   var nombre=comprarItem.getElementsByTagName('h3')[0].innerText
   var precio=comprarItem.getElementsByTagName('p')[0].innerText
-
-  agregarCarrito(img, nombre, precio);
+  if (carrito.some((producto) => producto.id === id)) {
+  carrito.push(productos)}
+  mostrarCarrito(img, nombre, precio,id);
 }
 
-function agregarCarrito( img, nombre, precio){
+
+let carrito= JSON.parse(localStorage.getItem("CarritoShop")) || [];
+actualizarCarrito();
+
+
+function mostrarCarrito( img, nombre, precio){
 
   var carro = document.querySelector('#cart');
-  var carroItem = document.createElement('li');
-    
-  carroItem.innerHTML+= `
-                        <img class="imgCarrito" src="${img}" alt="">
-                        <p class="nombreItem">${nombre}</p>
-                        <button class="add">+</button>
-                        <input class="cantidad" type="number" value="1">
-                        <button class="less">-</button>
-                        <p class="precioI">${precio}</p>
-                        <button class="eliminar">✗</button>
-                                                            `
-  carro.appendChild(carroItem);
-  carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem)
-  
-  actualizarCarrito();
-
-  // var iconoShop = document.getElementById("shop-cart")
-  // iconoShop.innerHTML= carroItem.length
+    var carroItem = document.createElement('li');
+    carroItem.innerHTML+= `
+                      <img class="imgCarrito" src="${img}" alt="">
+                      <p class="nombreItem">${nombre}</p>
+                      <button class="add">+</button>
+                      <input class="cantidad" type="number" value="1">
+                      <button class="less">-</button>
+                      <p class="precioI">${precio}</p>
+                      <button class="eliminar">✗</button>
+                                                          `
+    carro.appendChild(carroItem);
+    carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem);
+                                                        
 }
-
-// function cantidades(evento) {
-//   var input = evento.target
-//   if (input == 0){
-//     input.value = 1
-//   }
-//   actualizarCarrito()
-// }
-
 
 function quitarItem(evento){
   var btnclick = evento.target
@@ -132,26 +120,23 @@ function quitarItem(evento){
 
 
 function actualizarCarrito(){
-  var carroItem = document.getElementById('cart')
-  
-  var total = 0
-  for (var i = 0; i > carroItem.length; i++){
-    var carroItems = carroItem[i]
-    var precioItem = carroItems.document.getElementsByClassName('precioI')[0]
-    var cantItem = carroItems.document.getElementsByClassName('cantidad')[0]
-    var precioItem = parseFloat(precioItem.innerText(''))
-    var cant = cantItem.value
-    total = total + (precioItem * cant) 
-  }
-  document.getElementsByClassName('toti')[0].innerText= 'Total :$ '+ total
+  calcularTotal();
+  localStorage.setItem("CarritoShop", JSON.stringify(carrito));
 }
 
  
+function calcularTotal(){
+  let total= 0;
+  carrito.forEach((producto)=>{
+    total+=producto.precio * producto.cantidad
+  });
 
+  totalDom= document.getElementsByClassName('toti').innerText
+  totalDom= "total: $" + total;
+}
 
 
  
-
 
 
 
