@@ -30,7 +30,7 @@ btnVaciar.onclick = () => vaciarCarrito();
 
 let vaciarCarrito = () => {
   carrito = [];
-  mostrarCarrito();
+  mostrarCarritoItems();
 }
 
 
@@ -88,13 +88,13 @@ let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 function AgregarCarrito(evento){
   carrito.push(evento.target.getAttribute('marcador'))
   localStorage.setItem("CARRO", JSON.stringify(carrito));
-  mostrarCarrito();
+  mostrarCarritoItems();
 }
 
 let total= 0;
+var carro = document.querySelector('#cart');
 
-function mostrarCarrito(){
-  var carro = document.querySelector('#cart');
+function mostrarCarritoItems(){
   carro.textContent= '';
     const cart = [...new Set(carrito)]
     cart.forEach((mueble)=>{
@@ -113,24 +113,37 @@ function mostrarCarrito(){
                             <button class="less">-</button>
                             <p class="precioI">${muebleS[0].precio}</p>
                             <button class="eliminar">✗</button>`;
+  
+  const btnX = carroItem.getElementsByClassName('eliminar')[0];
+  btnX.addEventListener('click', quitarItem);   
+  btnX.dataset.m= mueble;
+  carroItem.appendChild(btnX);
+
+
   carro.appendChild(carroItem);
-  carroItem.getElementsByClassName('eliminar')[0].addEventListener('click', quitarItem);
   });
+
+  carritoVacio = document.createElement("p");
+  carro.appendChild(carritoVacio);
+  carrito.length === 0  && (carritoVacio.innerText = ("El carrito esta vacio"));
+  
   carroTotal= document.createElement('p');
   carro.appendChild(carroTotal);                                                 
   carroTotal.innerText = "TOTAL $ "+ calcularTotal();
-
 }
-mostrarCarrito();
+
+mostrarCarritoItems();
+
+
 
 function quitarItem(evento){
-  var btnclick = evento.target
-  btnclick.parentElement.remove()
-  carrito = carrito.filter((carritoId)=>{
-    return carritoId !==id;
+  const id = evento.target.dataset.m;
+  carrito = carrito.filter((carritoId) => {
+      return carritoId !== id;
   });
-  mostrarCarrito()
+  mostrarCarritoItems();
 }
+
 
  
 function calcularTotal(){
@@ -141,8 +154,6 @@ function calcularTotal(){
     return total + muebles[0].precio;
   },0).toFixed (2);
 }
-
-
 
 
 
