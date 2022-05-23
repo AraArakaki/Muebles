@@ -108,9 +108,7 @@ function mostrarCarritoItems(){
       carroItem.innerHTML=
                             `<img class="imgCarrito" src="${muebleS[0].img}" alt="">
                             <p class="nombreItem">${muebleS[0].categoria} ${muebleS[0].nombre}</p>
-                            <button class="add">+</button>
                             <input class="cantidad" type="number" value="${cantidad}">
-                            <button class="less">-</button>
                             <p class="precioI">${muebleS[0].precio}</p>
                             <button class="eliminar">✗</button>`;
   

@@ -123,10 +123,9 @@ h1{
 }
 
 #vaciar{
-    width:45px;
+    width:100%;
     padding:2px;
     background-color: rgba(0, 0, 0, 0);
-    display: inline-block;
 }
 
 .imgCarrito{
