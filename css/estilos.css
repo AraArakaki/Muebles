@@ -122,17 +122,11 @@ h1{
     color:rgba(0, 183, 255, 0.788);
 }
 
-/* #shopCart{
-    background-color: rgba(76, 172, 236, 0.842);
-    color:white;
-    border-radius: 25%;
-    padding:7px;
-    font-size: 7px;
-    position:relative;
-    top:-70%;
-    left:40%;
-} */
-
+#vaciar{
+    width:45px;
+    padding:2px;
+    background-color: rgba(0, 0, 0, 0);
+}
 
 .imgCarrito{
     background-color: rgba(239, 250, 250, 0.842);
