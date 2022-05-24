@@ -92,6 +92,7 @@ function AgregarCarrito(evento){
 }
 
 let total= 0;
+let cantidadM=0;
 var carro = document.querySelector('#cart');
 
 function mostrarCarritoItems(){
@@ -111,28 +112,25 @@ function mostrarCarritoItems(){
                             <input class="cantidad" type="number" value="${cantidad}">
                             <p class="precioI">${muebleS[0].precio}</p>
                             <button class="eliminar">✗</button>`;
-  
+  const btnCant= carroItem.getElementsByClassName('cantidad')[0];
+  btnCant.addEventListener('click', cambiarCantidades);
   const btnX = carroItem.getElementsByClassName('eliminar')[0];
   btnX.addEventListener('click', quitarItem);   
   btnX.dataset.m= mueble;
   carroItem.appendChild(btnX);
-
-
   carro.appendChild(carroItem);
+  cantidadTotal=carrito.length
+  
   });
-
   carritoVacio = document.createElement("p");
   carro.appendChild(carritoVacio);
   carrito.length === 0  && (carritoVacio.innerText = ("El carrito esta vacio"));
   
   carroTotal= document.createElement('p');
-  carro.appendChild(carroTotal);                                                 
-  carroTotal.innerText = "TOTAL $ "+ calcularTotal();
+  carro.appendChild(carroTotal); 
+  carroTotal.innerText = `TOTAL  $ ${calcularTotal()} (items ${cantidadTotal})` 
 }
-
 mostrarCarritoItems();
-
-
 
 function quitarItem(evento){
   const id = evento.target.dataset.m;
@@ -142,8 +140,14 @@ function quitarItem(evento){
   mostrarCarritoItems();
 }
 
+function cambiarCantidades(evento){
+  var input = evento.target
+  if(isNaN(input.value)|| input.value <= 0){
+    input.value= 1
+  }
+mostrarCarritoItems()
+}
 
- 
 function calcularTotal(){
   return carrito.reduce((total, mueble)=>{
     const muebles = productos.filter((muebleProductos)=>{
@@ -152,9 +156,34 @@ function calcularTotal(){
     return total + muebles[0].precio;
   },0).toFixed (2);
 }
+// //CUPON DESCUENTO
+function cupon(){
+  let cupon= document.getElementById("cupon")
+  cupon.value == "descuento10"?  total - ( total * 0.10): alert("No existe el cupon "+ cupon.value)  
+}
+
+document.getElementById("btnDescuento").addEventListener('click', cupon);
 
 
 
 
 
+// // Buscar categoria (Tipo de mueble) 
+// let categoria= prompt("que categoria esta buscando");
+// const filtroCategoria = productos.filter((productos)=> {
+//   return productos.categoria === categoria
+// })
+
+// //METODO DE PAGO
+// let total=0;
+// let metodoPago= prompt("Cual es tu metodo de pago Efectivo Debito Credito o Transeferencia Bancaria").toLowerCase();
+// if (metodoPago == 'efectivo'){
+//   total= (subtotal - (subtotal* 0.10))
+// } else if(metodoPago == 'credito') {
+//   total= (subtotal + (subtotal* 0.10));
+// } else {
+//   total= subtotal;
+// }
+
+// alert("su pago total en "+ metodoPago + " $ "+ total);
 

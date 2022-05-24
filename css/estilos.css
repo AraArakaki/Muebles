@@ -170,7 +170,7 @@ h1{
  .cantidad{
     width:3rem;
 }
-.eliminar:hover , .add:hover, .less:hover{
+.eliminar:hover {
     color:rgb(241, 247, 249);
     background-color: rgba(188, 233, 247, 0.795);
     border:white;
@@ -184,6 +184,15 @@ h1{
     width:50%;
     margin: auto;
 }
+
+#cupon, #btnDescuento{
+    width:50%;
+    margin: auto;
+    height:2rem;
+    padding:1rem;
+}
+
+
 #nav1{
     display:flex;
     flex-direction: row;
