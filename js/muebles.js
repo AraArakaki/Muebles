@@ -1,5 +1,6 @@
 
 
+
 // let mensaje = () => alert ("Desea suscribirse para recibir ofertas?");
 // mensaje();
  
@@ -21,9 +22,7 @@ btncerrar.onclick = () => cerrarCarrito();
 let cerrarCarrito = () => document.getElementById("carrito").style.right = "-50vw";
 
 const btnconfirmar = document.querySelector(".confirmar");
-btnconfirmar.onclick = () => thxByuy();
-let thxByuy = () => alert("Gracias por tu compra");
-
+btnconfirmar.onclick = () => thxBuy();
 
 const btnVaciar= document.getElementById('vaciar');
 btnVaciar.onclick = () => vaciarCarrito();
@@ -32,6 +31,7 @@ let vaciarCarrito = () => {
   carrito = [];
   mostrarCarritoItems();
 }
+
 
 
 //Listado con todos los productos
@@ -57,6 +57,7 @@ function mostrarProductos(){
     const contenedor= document.getElementById("galeria");
     
     let caja= document.createElement("div");
+    caja.classList.add('card');
   
     let imagenCaja= document.createElement('img');
     imagenCaja.setAttribute('src', producto.img);
@@ -64,7 +65,8 @@ function mostrarProductos(){
   
     let nombreCaja= document.createElement('h3');
     nombreCaja.textContent=`${producto.categoria} ${producto.nombre}`;
-  
+    
+
     let precio= document.createElement('p');
     precio.textContent= `$${producto.precio}`;
   
@@ -73,7 +75,16 @@ function mostrarProductos(){
     botonAddCarrito.setAttribute('marcador', producto.id);
     botonAddCarrito.classList.add('botonAddItem'); 
     botonAddCarrito.addEventListener('click', AgregarCarrito);
-    
+    botonAddCarrito.addEventListener('click', ()=>{
+      Toastify({
+        text:'Producto agregado al carrito',
+        duration: 3000,
+        position:'right',
+        style:{
+          background:'rgb(108, 185, 199)'
+        }
+      }).showToast()
+    })
     contenedor.appendChild(caja);
     caja.appendChild(imagenCaja);
     caja.appendChild(nombreCaja);
@@ -167,23 +178,11 @@ document.getElementById("btnDescuento").addEventListener('click', cupon);
 
 
 
-
 // // Buscar categoria (Tipo de mueble) 
 // let categoria= prompt("que categoria esta buscando");
 // const filtroCategoria = productos.filter((productos)=> {
 //   return productos.categoria === categoria
 // })
 
-// //METODO DE PAGO
-// let total=0;
-// let metodoPago= prompt("Cual es tu metodo de pago Efectivo Debito Credito o Transeferencia Bancaria").toLowerCase();
-// if (metodoPago == 'efectivo'){
-//   total= (subtotal - (subtotal* 0.10))
-// } else if(metodoPago == 'credito') {
-//   total= (subtotal + (subtotal* 0.10));
-// } else {
-//   total= subtotal;
-// }
 
-// alert("su pago total en "+ metodoPago + " $ "+ total);
 
