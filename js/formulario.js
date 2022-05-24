@@ -26,9 +26,14 @@ function validarForm () {
         return false;
     } else {campoRequerido.innerHTML= "";}
 
-
-    alert("Formulario enviado")
+    Swal.fire({  
+            title: "GRACIAS POR SU COMPRA",   
+            text: "Su factura fue enviada a su correo",   
+            icon:"",
+            timer: 2000 });
+    
     document.getElementsByTagName("input").value.innerText="";
 }   
 
 document.getElementById("btnEnviar").addEventListener('click', validarForm);
+

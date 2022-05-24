@@ -22,7 +22,12 @@ btncerrar.onclick = () => cerrarCarrito();
 let cerrarCarrito = () => document.getElementById("carrito").style.right = "-50vw";
 
 const btnconfirmar = document.querySelector(".confirmar");
-btnconfirmar.onclick = () => thxBuy();
+btnconfirmar.addEventListener('click', ()=> {
+  Swal.fire({
+    text:"Gracias por tu compra!",
+    confirmButtonText:'continuar'
+  })
+}) 
 
 const btnVaciar= document.getElementById('vaciar');
 btnVaciar.onclick = () => vaciarCarrito();
@@ -31,6 +36,7 @@ let vaciarCarrito = () => {
   carrito = [];
   mostrarCarritoItems();
 }
+
 
 
 
