@@ -29,7 +29,7 @@ btnconfirmar.addEventListener('click', ()=> {
   })
 }) 
 
-const btnVaciar= document.getElementById('vaciar');
+const btnVaciar = document.getElementById('vaciar');
 btnVaciar.onclick = () => vaciarCarrito();
 
 let vaciarCarrito = () => {
@@ -56,76 +56,73 @@ let vaciarCarrito = () => {
 
 // ];
 
-
+ fetch('js/productos.json')
+ .then(res=>res.json())
+ .then(json => catalogo(json))
 
 //Mostrar todos los productos
-function mostrarProductos(){
-  fetch('js/productos.json')
-  .then(res=>res.json())
-  .then((productos)=>
+function catalogo(json){
 
-  productos.forEach((producto)=>{
+    json.forEach((producto)=>{
 
-    const contenedor= document.getElementById("galeria");
+      const contenedor= document.getElementById("galeria");
+
+      let caja= document.createElement("div");
+      caja.classList.add('card');
     
-    let caja= document.createElement("div");
-    caja.classList.add('card');
-  
-    let imagenCaja= document.createElement('img');
-    imagenCaja.setAttribute('src', producto.img);
-    // imagenCaja.classList.add("img")
-  
-    let nombreCaja= document.createElement('h3');
-    nombreCaja.textContent=`${producto.categoria} ${producto.nombre}`;
+      let imagenCaja= document.createElement('img');
+      imagenCaja.setAttribute('src', producto.img);
+      // imagenCaja.classList.add("img")
     
+      let nombreCaja = document.createElement('h3');
+      nombreCaja.textContent =`${producto.categoria} ${producto.nombre}`;
 
-    let precio= document.createElement('p');
-    precio.textContent= `$${producto.precio}`;
-  
-    let botonAddCarrito= document.createElement('button');
-    botonAddCarrito.textContent='Agregar al Carrito';
-    botonAddCarrito.setAttribute('marcador', producto.id);
-    botonAddCarrito.classList.add('botonAddItem'); 
-    botonAddCarrito.addEventListener('click', AgregarCarrito);
-    botonAddCarrito.addEventListener('click', ()=>{
-      Toastify({
-        text:'Producto agregado al carrito',
-        duration: 3000,
-        position:'right',
-        style:{
-          background:'rgb(108, 185, 199)'
-        }
-      }).showToast()
-    })
-    contenedor.appendChild(caja);
-    caja.appendChild(imagenCaja);
-    caja.appendChild(nombreCaja);
-    caja.appendChild(precio);
-    caja.appendChild(botonAddCarrito);
-  }));
+      let precio = document.createElement('p');
+      precio.textContent = `$${producto.precio}`;
+    
+      let botonAddCarrito = document.createElement('button');
+      botonAddCarrito.textContent = 'Agregar al Carrito';
+      botonAddCarrito.setAttribute('marcador', producto.id);
+      botonAddCarrito.classList.add('botonAddItem'); 
+      botonAddCarrito.addEventListener('click', AgregarCarrito);
+      botonAddCarrito.addEventListener('click', () => {
+        Toastify({
+          text:`${producto.categoria} ${producto.nombre}`+' agregado al carrito',
+          duration: 3000,
+          position:'right',
+          style:{background:'rgb(108, 185, 199)'}
+        }).showToast()
+      })
+      contenedor.appendChild(caja);
+      caja.appendChild(imagenCaja);
+      caja.appendChild(nombreCaja);
+      caja.appendChild(precio);
+      caja.appendChild(botonAddCarrito);
+    });
+ 
 }
-mostrarProductos();
+catalogo();
 
-let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
+let carrito = JSON.parse(localStorage.getItem("CARRO")) || []
 
 function AgregarCarrito(evento){
+  
   carrito.push(evento.target.getAttribute('marcador'))
   localStorage.setItem("CARRO", JSON.stringify(carrito));
   mostrarCarritoItems();
 }
 
-let total= 0;
-let cantidadM=0;
+let total = 0;
 var carro = document.querySelector('#cart');
 
 function mostrarCarritoItems(){
-  carro.textContent= '';
+  carro.textContent = '';
     const cart = [...new Set(carrito)]
     cart.forEach((mueble)=>{
-      const muebleS = productos.filter((muebleProductos)=>{
+      const muebleS = json.filter((muebleProductos)=>{
         return muebleProductos.id === parseInt(mueble);
       });
-      const cantidad= carrito.reduce((total, muebleId)=>{
+      const cantidad = carrito.reduce((total, muebleId)=>{
         return muebleId === mueble ? total += 1 : total;
       },0);
       const carroItem = document.createElement('li');

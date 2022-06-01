@@ -203,18 +203,17 @@ h1{
     right:0;
     padding:2rem;
 }
-#nav1 li img{
+#nav1 li img {
     width:20px;
     height:auto;
 }
 #nav1 li {
     list-style-type: none;
 }
-
-#nav1 li img:hover{
-    background-color:   rgb(177, 238, 245);
+#nav1 li img:hover {
+    background-color: rgb(177, 238, 245);
 }
-#shopCart{
+#shopCart {
     display: inline-block;
     padding-right: 0.5rem;
     border-radius: 50%;
