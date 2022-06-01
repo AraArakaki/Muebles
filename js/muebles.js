@@ -40,24 +40,30 @@ let vaciarCarrito = () => {
 
 
 
-//Listado con todos los productos
-const productos=[
-  {id:1, categoria:"silla ", nombre:"sahan",precio:6000, img: 'imagenes/behnam-norouzi-phXwnWWz-BM-unsplash.jpg'},
-  {id:2, categoria:"silla", nombre:"anton",precio:5000, img: 'imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg'},
-  {id:3, categoria:"mesa", nombre:"sahan",precio:6000, img: 'imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg'},
-  {id:4, categoria:"mesa", nombre:"anton",precio:6000, img: 'imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg'}, 
-  {id:5, categoria:"sillon", nombre:"sahan",precio:6000, img: 'imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg'},  
-  {id:6, categoria:"sillon", nombre:"anton",precio:6000, img: 'imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg'},
-  {id:7, categoria:"espejo", nombre:"sahan",precio:6000, img: 'imagenes/milada-vigerova-pdZ2BwpLyis-unsplash.jpg'},  
-  {id:8, categoria:"espejo", nombre:"anton",precio:6000, img: 'imagenes/giorgio-trovato-EwKX1wH8Tyk-unsplash.jpg'},
-  {id:9, categoria:"deco", nombre:"anton",precio:6000, img: 'imagenes/josh-hemsley-VnYuKzrN82E-unsplash.jpg'},
-  {id:10, categoria:"lampara", nombre:"sahan",precio:6000, img: 'imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg'},
-  {id:11, categoria:"lampara", nombre:"anton",precio:6000, img: 'imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg'},
+// //Listado con todos los productos
+// const productos=[
+//   {id:1, categoria:"silla ", nombre:"sahan",precio:6000, img: 'imagenes/behnam-norouzi-phXwnWWz-BM-unsplash.jpg'},
+//   {id:2, categoria:"silla", nombre:"anton",precio:5000, img: 'imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg'},
+//   {id:3, categoria:"mesa", nombre:"sahan",precio:6000, img: 'imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg'},
+//   {id:4, categoria:"mesa", nombre:"anton",precio:6000, img: 'imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg'}, 
+//   {id:5, categoria:"sillon", nombre:"sahan",precio:6000, img: 'imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg'},  
+//   {id:6, categoria:"sillon", nombre:"anton",precio:6000, img: 'imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg'},
+//   {id:7, categoria:"espejo", nombre:"sahan",precio:6000, img: 'imagenes/milada-vigerova-pdZ2BwpLyis-unsplash.jpg'},  
+//   {id:8, categoria:"espejo", nombre:"anton",precio:6000, img: 'imagenes/giorgio-trovato-EwKX1wH8Tyk-unsplash.jpg'},
+//   {id:9, categoria:"deco", nombre:"anton",precio:6000, img: 'imagenes/josh-hemsley-VnYuKzrN82E-unsplash.jpg'},
+//   {id:10, categoria:"lampara", nombre:"sahan",precio:6000, img: 'imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg'},
+//   {id:11, categoria:"lampara", nombre:"anton",precio:6000, img: 'imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg'},
 
-];
+// ];
+
+
 
 //Mostrar todos los productos
 function mostrarProductos(){
+  fetch('js/productos.json')
+  .then(res=>res.json())
+  .then((productos)=>
+
   productos.forEach((producto)=>{
 
     const contenedor= document.getElementById("galeria");
@@ -96,7 +102,7 @@ function mostrarProductos(){
     caja.appendChild(nombreCaja);
     caja.appendChild(precio);
     caja.appendChild(botonAddCarrito);
-  });
+  }));
 }
 mostrarProductos();
 
@@ -129,14 +135,18 @@ function mostrarCarritoItems(){
                             <input class="cantidad" type="number" value="${cantidad}">
                             <p class="precioI">${muebleS[0].precio}</p>
                             <button class="eliminar">✗</button>`;
-  const btnCant= carroItem.getElementsByClassName('cantidad')[0];
+  
+  const btnCant = carroItem.getElementsByClassName('cantidad')[0];
   btnCant.addEventListener('click', cambiarCantidades);
+  
+  
   const btnX = carroItem.getElementsByClassName('eliminar')[0];
   btnX.addEventListener('click', quitarItem);   
-  btnX.dataset.m= mueble;
+  btnX.dataset.m = mueble;
+
   carroItem.appendChild(btnX);
   carro.appendChild(carroItem);
-  cantidadTotal=carrito.length
+  cantidadTotal = carrito.length
   
   });
   carritoVacio = document.createElement("p");
@@ -146,8 +156,12 @@ function mostrarCarritoItems(){
   carroTotal= document.createElement('p');
   carro.appendChild(carroTotal); 
   carroTotal.innerText = `TOTAL  $ ${calcularTotal()} (items ${cantidadTotal})` 
+
+  const cantCarrito = document.getElementById('shopCart');
+  cantCarrito.innerText = "(" + cantidadTotal + ")";
 }
 mostrarCarritoItems();
+
 
 function quitarItem(evento){
   const id = evento.target.dataset.m;
@@ -157,13 +171,21 @@ function quitarItem(evento){
   mostrarCarritoItems();
 }
 
-function cambiarCantidades(evento){
-  var input = evento.target
-  if(isNaN(input.value)|| input.value <= 0){
-    input.value= 1
+// function cambiarCantidades(evento){
+//   var input = evento.target
+//   if(isNaN(input.value)|| input.value <=0){
+//     input.value = 2;
+//   }
+// mostrarCarritoItems()
+// }
+let cantidad = 0;
+function cambiarCantidades (evento){
+  cantidad = evento.target
+  if (cantidad == 1){
+    cantidad++
   }
-mostrarCarritoItems()
 }
+mostrarCarritoItems()
 
 function calcularTotal(){
   return carrito.reduce((total, mueble)=>{
@@ -190,5 +212,15 @@ document.getElementById("btnDescuento").addEventListener('click', cupon);
 //   return productos.categoria === categoria
 // })
 
+
+// fetch('https://mapping.launceston.tas.gov.au/arcgis/rest/services/Public/DetailSurvey/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json')
+ 
+//  .then((response)=>response.json())
+//   .then((json)=>{
+//    console.log(json);
+//    let resultado= document.getElementById('resultado');
+//    let salida = `id: ${json.id} title: ${json.title}`
+//    resultado.innerHTML= salida;
+//  })
 
 

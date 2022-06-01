@@ -18,7 +18,7 @@ function validarForm () {
         campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
         email.classList.add("inputRequired")
         return false;
-    } else {campoRequerido.innerHTML= "";}
+    } else {campoRequerido.innerHTML= "";} 
 
     if (direccion.value.length == 0){
         campoRequerido.innerHTML= `<p> Campos requeridos (*) </p>`
@@ -29,7 +29,6 @@ function validarForm () {
     Swal.fire({  
             title: "GRACIAS POR SU COMPRA",   
             text: "Su factura fue enviada a su correo",   
-            icon:"",
             timer: 2000 });
     
     document.getElementsByTagName("input").value.innerText="";

@@ -201,23 +201,26 @@ h1{
     position:absolute;
     top: 0;
     right:0;
-    padding:.5rem;
+    padding:2rem;
 }
 #nav1 li img{
-    width:30px;
+    width:20px;
     height:auto;
-    padding:7px;
 }
 #nav1 li {
     list-style-type: none;
-
-    padding:0 1rem;
 }
 
 #nav1 li img:hover{
     background-color:   rgb(177, 238, 245);
 }
-
+#shopCart{
+    display: inline-block;
+    padding-right: 0.5rem;
+    border-radius: 50%;
+    font-size:1rem;
+    margin:0;
+}
 
 /* FORMULARIO */
 
@@ -267,12 +270,4 @@ a{
     color:black;
     text-decoration: none;
     display:inline-block;
-}
-.swal-text{
-    font-size: 1rem;
-    font-family: monospace;
-}
-.swal-title{
-    font-size: 2rem;
-    font-family: monospace;
 }

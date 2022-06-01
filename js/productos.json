@@ -1,0 +1,14 @@
+[
+    {"id":1, "categoria":"silla ", "nombre":"sahan","precio":6000, "img": "imagenes/behnam-norouzi-phXwnWWz-BM-unsplash.jpg"},
+    {"id":2, "categoria":"silla", "nombre":"anton","precio":5000, "img": "imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg"},
+    {"id":3, "categoria":"mesa", "nombre":"sahan","precio":6000, "img": "imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg"},
+    {"id":4, "categoria":"mesa", "nombre":"anton","precio":6000, "img": "imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg"}, 
+    {"id":5, "categoria":"sillon", "nombre":"sahan","precio":6000, "img": "imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg"},  
+    {"id":6, "categoria":"sillon", "nombre":"anton","precio":6000, "img": "imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg"},
+    {"id":7, "categoria":"espejo", "nombre":"sahan","precio":6000, "img": "imagenes/milada-vigerova-pdZ2BwpLyis-unsplash.jpg"},  
+    {"id":8, "categoria":"espejo", "nombre":"anton","precio":6000, "img": "imagenes/giorgio-trovato-EwKX1wH8Tyk-unsplash.jpg"},
+    {"id":9, "categoria":"deco", "nombre":"anton","precio":6000, "img": "imagenes/josh-hemsley-VnYuKzrN82E-unsplash.jpg"},
+    {"id":10," categoria":"lampara", "nombre":"sahan","precio":6000, "img": "imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg"},
+    {"id":11," categoria":"lampara", "nombre":"anton","precio":6000, "img": "imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg"}
+  
+  ]
