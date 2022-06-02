@@ -37,25 +37,7 @@ let vaciarCarrito = () => {
   mostrarCarritoItems();
 }
 
-
-
-
-// //Listado con todos los productos
-// const productos=[
-//   {id:1, categoria:"silla ", nombre:"sahan",precio:6000, img: 'imagenes/behnam-norouzi-phXwnWWz-BM-unsplash.jpg'},
-//   {id:2, categoria:"silla", nombre:"anton",precio:5000, img: 'imagenes/juan-burgos-Dp2xzrdXrNs-unsplash.jpg'},
-//   {id:3, categoria:"mesa", nombre:"sahan",precio:6000, img: 'imagenes/nathan-oakley-OngbrOmqtzc-unsplash.jpg'},
-//   {id:4, categoria:"mesa", nombre:"anton",precio:6000, img: 'imagenes/hannah-busing-nME9TubZtSo-unsplash.jpg'}, 
-//   {id:5, categoria:"sillon", nombre:"sahan",precio:6000, img: 'imagenes/eugenivy_now-1JJJIHh7-Mk-unsplash.jpg'},  
-//   {id:6, categoria:"sillon", nombre:"anton",precio:6000, img: 'imagenes/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg'},
-//   {id:7, categoria:"espejo", nombre:"sahan",precio:6000, img: 'imagenes/milada-vigerova-pdZ2BwpLyis-unsplash.jpg'},  
-//   {id:8, categoria:"espejo", nombre:"anton",precio:6000, img: 'imagenes/giorgio-trovato-EwKX1wH8Tyk-unsplash.jpg'},
-//   {id:9, categoria:"deco", nombre:"anton",precio:6000, img: 'imagenes/josh-hemsley-VnYuKzrN82E-unsplash.jpg'},
-//   {id:10, categoria:"lampara", nombre:"sahan",precio:6000, img: 'imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg'},
-//   {id:11, categoria:"lampara", nombre:"anton",precio:6000, img: 'imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg'},
-
-// ];
-
+//Fetch porductos de archivo json
  fetch('js/productos.json')
  .then(res=>res.json())
  .then(json => catalogo(json))
@@ -64,7 +46,6 @@ let vaciarCarrito = () => {
 function catalogo(json){
 
     json.forEach((producto)=>{
-
       const contenedor= document.getElementById("galeria");
 
       let caja= document.createElement("div");
@@ -72,7 +53,6 @@ function catalogo(json){
     
       let imagenCaja= document.createElement('img');
       imagenCaja.setAttribute('src', producto.img);
-      // imagenCaja.classList.add("img")
     
       let nombreCaja = document.createElement('h3');
       nombreCaja.textContent =`${producto.categoria} ${producto.nombre}`;
@@ -103,7 +83,7 @@ function catalogo(json){
 }
 catalogo();
 
-let carrito = JSON.parse(localStorage.getItem("CARRO")) || []
+let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
 function AgregarCarrito(evento){
   
@@ -135,7 +115,6 @@ function mostrarCarritoItems(){
   
   const btnCant = carroItem.getElementsByClassName('cantidad')[0];
   btnCant.addEventListener('click', cambiarCantidades);
-  
   
   const btnX = carroItem.getElementsByClassName('eliminar')[0];
   btnX.addEventListener('click', quitarItem);   
@@ -197,7 +176,6 @@ function cupon(){
   let cupon= document.getElementById("cupon")
   cupon.value == "descuento10"?  total - ( total * 0.10): alert("No existe el cupon "+ cupon.value)  
 }
-
 document.getElementById("btnDescuento").addEventListener('click', cupon);
 
 
@@ -210,14 +188,6 @@ document.getElementById("btnDescuento").addEventListener('click', cupon);
 // })
 
 
-// fetch('https://mapping.launceston.tas.gov.au/arcgis/rest/services/Public/DetailSurvey/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json')
  
-//  .then((response)=>response.json())
-//   .then((json)=>{
-//    console.log(json);
-//    let resultado= document.getElementById('resultado');
-//    let salida = `id: ${json.id} title: ${json.title}`
-//    resultado.innerHTML= salida;
-//  })
 
 
