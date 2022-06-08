@@ -19,7 +19,7 @@ let abrirCarrito = () => document.getElementById("carrito").style.right = "0";
 
 const btncerrar = document.querySelector(".cerrar");
 btncerrar.onclick = () => cerrarCarrito();
-let cerrarCarrito = () => document.getElementById("carrito").style.right = "-60vw";
+let cerrarCarrito = () => document.getElementById("carrito").style.right = "-100vw";
 
 const btnconfirmar = document.querySelector(".confirmar");
 btnconfirmar.addEventListener('click', ()=> {
