@@ -19,7 +19,7 @@ let abrirCarrito = () => document.getElementById("carrito").style.right = "0";
 
 const btncerrar = document.querySelector(".cerrar");
 btncerrar.onclick = () => cerrarCarrito();
-let cerrarCarrito = () => document.getElementById("carrito").style.right = "-50vw";
+let cerrarCarrito = () => document.getElementById("carrito").style.right = "-60vw";
 
 const btnconfirmar = document.querySelector(".confirmar");
 btnconfirmar.addEventListener('click', ()=> {
@@ -38,14 +38,18 @@ let vaciarCarrito = () => {
 }
 
 //Fetch porductos de archivo json
+//  fetch('js/productos.json')
+//  .then(res=>res.json())
+//  .then(json => catalogo(json))
+
  fetch('js/productos.json')
- .then(res=>res.json())
- .then(json => catalogo(json))
+  .then((response) => response.json())
+  .then(mostrarCatalogo);
 
 //Mostrar todos los productos
-function catalogo(json){
+function mostrarCatalogo(data){
 
-    json.forEach((producto)=>{
+    data.forEach((producto)=>{
       const contenedor= document.getElementById("galeria");
 
       let caja= document.createElement("div");
@@ -53,12 +57,18 @@ function catalogo(json){
     
       let imagenCaja= document.createElement('img');
       imagenCaja.setAttribute('src', producto.img);
-    
+
+      let like = document.createElement('img');
+      like.classList.add('wishlist');
+      like.src="imagenes/icons8-heart-24.png";
+      // like.addEventListener('click', addWishList);
+
       let nombreCaja = document.createElement('h3');
       nombreCaja.textContent =`${producto.categoria} ${producto.nombre}`;
 
       let precio = document.createElement('p');
       precio.textContent = `$${producto.precio}`;
+      precio.classList.add('precioCard')
     
       let botonAddCarrito = document.createElement('button');
       botonAddCarrito.textContent = 'Agregar al Carrito';
@@ -70,23 +80,24 @@ function catalogo(json){
           text:`${producto.categoria} ${producto.nombre}`+' agregado al carrito',
           duration: 3000,
           position:'right',
-          style:{background:'rgb(108, 185, 199)'}
+          style:{background:'rgb(235, 149, 202)'}
         }).showToast()
       })
       contenedor.appendChild(caja);
       caja.appendChild(imagenCaja);
+      caja.appendChild(like);
+      caja.appendChild(botonAddCarrito);
       caja.appendChild(nombreCaja);
       caja.appendChild(precio);
-      caja.appendChild(botonAddCarrito);
     });
- 
+
 }
-catalogo();
+mostrarCatalogo();
+
 
 let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
 function AgregarCarrito(evento){
-  
   carrito.push(evento.target.getAttribute('marcador'))
   localStorage.setItem("CARRO", JSON.stringify(carrito));
   mostrarCarritoItems();
@@ -99,7 +110,7 @@ function mostrarCarritoItems(){
   carro.textContent = '';
     const cart = [...new Set(carrito)]
     cart.forEach((mueble)=>{
-      const muebleS = json.filter((muebleProductos)=>{
+      const muebleS = data.filter((muebleProductos)=>{
         return muebleProductos.id === parseInt(mueble);
       });
       const cantidad = carrito.reduce((total, muebleId)=>{
