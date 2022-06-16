@@ -1,8 +1,3 @@
-
-
-
-// let mensaje = () => alert ("Desea suscribirse para recibir ofertas?");
-// mensaje();
  
 //Elemento creado desde js 
 let barra= document.getElementById('top');
@@ -10,7 +5,6 @@ let parrafo = document.createElement("p");
 parrafo.classList.add('pDesc')
 parrafo.innerHTML= "<p>Cupon de descuento <span>DESCUENTO10</span></p>";
 barra.appendChild(parrafo);
-
 
 // Botones
 const btnabrir = document.querySelector("#abrirCart");
@@ -31,76 +25,52 @@ btnconfirmar.addEventListener('click', ()=> {
 
 const btnVaciar = document.getElementById('vaciar');
 btnVaciar.onclick = () => vaciarCarrito();
-
 let vaciarCarrito = () => {
   carrito = [];
   mostrarCarritoItems();
 }
 
-//Fetch porductos de archivo json
-//  fetch('js/productos.json')
-//  .then(res=>res.json())
-//  .then(json => catalogo(json))
+//Fetch json catalogo de productos
+ fetch("js/productos.json")
+ .then((res) => res.json())
+ .then((data)=> {mostrarCatalogo(data);})
 
- fetch('js/productos.json')
-  .then((response) => response.json())
-  .then(mostrarCatalogo);
-
-//Mostrar todos los productos
+//Mostrar todos los productos en galeria
 function mostrarCatalogo(data){
-
-    data.forEach((producto)=>{
+    productos = data;
+    productos.forEach((producto)=>{
       const contenedor= document.getElementById("galeria");
-
-      let caja= document.createElement("div");
-      caja.classList.add('card');
-    
-      let imagenCaja= document.createElement('img');
-      imagenCaja.setAttribute('src', producto.img);
-
-      let like = document.createElement('img');
-      like.classList.add('wishlist');
-      like.src="imagenes/icons8-heart-24.png";
-      // like.addEventListener('click', addWishList);
-
-      let nombreCaja = document.createElement('h3');
-      nombreCaja.textContent =`${producto.categoria} ${producto.nombre}`;
-
-      let precio = document.createElement('p');
-      precio.textContent = `$${producto.precio}`;
-      precio.classList.add('precioCard')
-    
-      let botonAddCarrito = document.createElement('button');
-      botonAddCarrito.textContent = 'Agregar al Carrito';
-      botonAddCarrito.setAttribute('marcador', producto.id);
-      botonAddCarrito.classList.add('botonAddItem'); 
-      botonAddCarrito.addEventListener('click', AgregarCarrito);
-      botonAddCarrito.addEventListener('click', () => {
-        Toastify({
-          text:`${producto.categoria} ${producto.nombre}`+' agregado al carrito',
-          duration: 3000,
-          position:'right',
-          style:{background:'rgb(235, 149, 202)'}
-        }).showToast()
-      })
-      contenedor.appendChild(caja);
-      caja.appendChild(imagenCaja);
-      caja.appendChild(like);
-      caja.appendChild(botonAddCarrito);
-      caja.appendChild(nombreCaja);
-      caja.appendChild(precio);
+      contenedor.innerHTML+=`
+                          <div class= "card">
+                            <img src= ${producto.img}>
+                            <img src="imagenes/icons8-heart-24.png" class="wishlist">
+                            <h3>${producto.categoria} ${producto.nombre}</h3>
+                            <p class="precioCard"> ${producto.precio}</p>
+                            <button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
+                          </div>`
     });
-
 }
-mostrarCatalogo();
-
 
 let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
-function AgregarCarrito(evento){
-  carrito.push(evento.target.getAttribute('marcador'))
-  localStorage.setItem("CARRO", JSON.stringify(carrito));
+function AgregarCarrito(id){
+  if (carrito.some((item) => item.id === id)) {
+    cantidad++
+  } else {
+    const item = productos.find((producto) => producto.id === id);
+
+    carrito.push({
+      ...item,
+      cantidad: 1,
+    });
+  }
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
   mostrarCarritoItems();
+  calcularTotal();
+  localStorage.setItem("CARRO", JSON.stringify(carrito));
 }
 
 let total = 0;
@@ -108,97 +78,46 @@ var carro = document.querySelector('#cart');
 
 function mostrarCarritoItems(){
   carro.textContent = '';
-    const cart = [...new Set(carrito)]
-    cart.forEach((mueble)=>{
-      const muebleS = data.filter((muebleProductos)=>{
-        return muebleProductos.id === parseInt(mueble);
-      });
-      const cantidad = carrito.reduce((total, muebleId)=>{
-        return muebleId === mueble ? total += 1 : total;
-      },0);
+  carrito.forEach((item)=>{
+    
       const carroItem = document.createElement('li');
-      carroItem.innerHTML=
-                            `<img class="imgCarrito" src="${muebleS[0].img}" alt="">
-                            <p class="nombreItem">${muebleS[0].categoria} ${muebleS[0].nombre}</p>
-                            <input class="cantidad" type="number" value="${cantidad}">
-                            <p class="precioI">${muebleS[0].precio}</p>
-                            <button class="eliminar">✗</button>`;
+      carroItem.innerHTML+=
+                            `<img class="imgCarrito" src="${item.img}" alt="">
+                            <p class="nombreItem">${item.categoria} ${item.nombre}</p>
+                            <input class="cantidad" type="number" value=1 onchage="('change',cambiarCantidades)">
+                            <p class="precioI">${item.precio}</p>
+                            <button class="eliminar" onclick="quitarItem(${item.id})">✗</button>`;
   
-  const btnCant = carroItem.getElementsByClassName('cantidad')[0];
-  btnCant.addEventListener('click', cambiarCantidades);
-  
-  const btnX = carroItem.getElementsByClassName('eliminar')[0];
-  btnX.addEventListener('click', quitarItem);   
-  btnX.dataset.m = mueble;
-
-  carroItem.appendChild(btnX);
   carro.appendChild(carroItem);
-  cantidadTotal = carrito.length
   
   });
   carritoVacio = document.createElement("p");
   carro.appendChild(carritoVacio);
   carrito.length === 0  && (carritoVacio.innerText = ("El carrito esta vacio"));
-  
-  carroTotal= document.createElement('p');
-  carro.appendChild(carroTotal); 
-  carroTotal.innerText = `TOTAL  $ ${calcularTotal()} (items ${cantidadTotal})` 
 
+//Cantidad de productos en el carrito
+  var cantidadTotal = carrito.length;
   const cantCarrito = document.getElementById('shopCart');
   cantCarrito.innerText = "(" + cantidadTotal + ")";
 }
-mostrarCarritoItems();
+actualizarCarrito();
 
 
-function quitarItem(evento){
-  const id = evento.target.dataset.m;
-  carrito = carrito.filter((carritoId) => {
-      return carritoId !== id;
-  });
-  mostrarCarritoItems();
-}
-
-// function cambiarCantidades(evento){
-//   var input = evento.target
-//   if(isNaN(input.value)|| input.value <=0){
-//     input.value = 2;
-//   }
-// mostrarCarritoItems()
-// }
-let cantidad = 0;
-function cambiarCantidades (evento){
-  cantidad = evento.target
-  if (cantidad == 1){
-    cantidad++
-  }
-}
-mostrarCarritoItems()
 
 function calcularTotal(){
-  return carrito.reduce((total, mueble)=>{
-    const muebles = productos.filter((muebleProductos)=>{
-      return muebleProductos.id === parseInt(mueble);
-    });
-    return total + muebles[0].precio;
-  },0).toFixed (2);
+  var totales = 0;
+  carrito.forEach((item) => {
+    totales += item.precio ;
+  });
+  var carroTotal = document.createElement('p');
+  carroTotal.innerText = `TOTAL $ ${totales} `
+  carro.appendChild(carroTotal);
 }
-// //CUPON DESCUENTO
-function cupon(){
-  let cupon= document.getElementById("cupon")
-  cupon.value == "descuento10"?  total - ( total * 0.10): alert("No existe el cupon "+ cupon.value)  
+
+
+function quitarItem(id) {
+  carrito = carrito.filter((item) => item.id !== id);
+
+  actualizarCarrito();
 }
-document.getElementById("btnDescuento").addEventListener('click', cupon);
-
-
-
-
-// // Buscar categoria (Tipo de mueble) 
-// let categoria= prompt("que categoria esta buscando");
-// const filtroCategoria = productos.filter((productos)=> {
-//   return productos.categoria === categoria
-// })
-
-
- 
-
 
