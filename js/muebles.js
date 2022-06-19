@@ -75,8 +75,7 @@ function AgregarCarrito(id){
   const cantidad = document.getElementsByClassName('cantidad');
 
   if (carrito.some((item) => item.id === id && cantidad >= 1)) {
-      console.log(id)
-      
+    cantidad++;     
   } else {
     const item = productos.find((producto) => producto.id === id);
     carrito.push({
