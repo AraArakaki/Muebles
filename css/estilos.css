@@ -49,7 +49,7 @@ h1{
 #shopCart {
     display: inline-block;
     border-radius: 50%;
-    font-size:1rem;
+    font-size:.8rem;
     margin:0;
 }
 
@@ -69,6 +69,24 @@ h1{
 #nav2 li:hover, #nav1 li:hover{
     background-color: rgba(236, 235, 235, 0.548);
 }
+
+.categorias{
+    display:none;
+}
+
+li #shopCategorias:hover>.categorias{
+    display:block;
+    /* flex-direction: row;
+    position:absolute;
+    top:7.2rem; */
+}
+.categorias li{
+    padding-left:3rem;
+}
+.categorias li:hover{
+    text-decoration: underline;
+}
+
 .pDesc{
     background-color:rgba(0, 0, 0, 0.89);
     color:white;
@@ -128,6 +146,8 @@ footer{
     position: relative;
     border-radius: 1%;
     background-color: rgba(250, 250, 250, 0.954);
+    box-shadow: 2px 3px 13px rgba(196, 193, 193, 0.233);
+
 }
 
 .card img{
@@ -179,15 +199,18 @@ button:hover{
 
 .botonAddItem{
     position:absolute;
-    top:64%;
+    top:0%;
     width:100%;
-    background-color: rgb(255, 255, 255);
+    height:100%;
     opacity:0;
     font-size: 0.5rem;
     padding:0.8rem;
 }
 .card:hover>.botonAddItem{
+    background-color: rgba(24, 23, 23, 0.541);
     opacity:1;
+    color:white;
+
 }
 
 
@@ -199,17 +222,16 @@ button:hover{
     position:fixed;
     top:0;
     right:-100vw;
-    width:50vw;
+    width:25vw;
     height:100%;
     z-index: 3;
-    padding:3rem;
+    padding:1rem 3rem;
     overflow:scroll;
     transition: ease-in-out 1s;
-   
     display: grid;
+    gap:1rem;
     grid-template-rows: auto;
     grid-template-columns: auto;
-    gap: 1rem;
     box-shadow:-5px -9px 10px rgba(27, 25, 25, 0.123);
     align-content: start;
     
@@ -217,8 +239,9 @@ button:hover{
 .cerrar{
     width:3rem;
     height:3rem;
-    color:black;
-    border:1px solid rgba(224, 222, 222, 0.658);
+    color:rgb(118, 170, 184);
+    font-weight: 900;
+    background-color: transparent;
 }
 .cerrar:hover{
     color:rgba(0, 183, 255, 0.788);
@@ -227,64 +250,77 @@ button:hover{
 #vaciar{
     width:100%;
     padding:2px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 }
 
 .imgCarrito{
     background-color: rgba(239, 250, 250, 0.842);
-    width:100px;
-    height:100px;
-    border-radius: 5px;
+    width:60px;
+    height:60px;
+    border-radius: 3px;
     object-fit: cover;
 }
+#cart{
+    width:90%;
+}
 
-#carrito li{
+#cart li{
     display:flex;
     flex-direction: row;
-    gap: 1rem;
     align-items:center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+    box-shadow: 2px 3px 21px rgba(236, 235, 235, 0.336);
     padding:1rem;
-    width:90%;
+    margin:0.3rem 0;
+    width:100%;
     justify-content: space-between;
 }
 
 .nombreItem{
     text-transform: uppercase;
-    font-weight: bold;
+    font-size: 0.6rem;
 }
 
-.eliminar , .add, .less{
-    color:rgb(182, 179, 179);
+.eliminar{
+    color:rgb(169, 177, 177);
+    background-color:transparent;
+
     width: 1.5rem;
     height: 1.5rem;
-    border: 1px solid rgb(182, 179, 179);
-    border-radius: 100%;
     padding:5px;
 }
 
 .eliminar:hover {
     color:rgb(241, 247, 249);
-    background-color: rgba(188, 233, 247, 0.795);
     border:white;
 }
 
 .cantidad{
-    width:3rem;
-    border:.5px solid rgb(182, 179, 179);
+    width:1.3rem;
+    border:.5px solid transparent;
     padding:.5rem;
 }
 .confirmar{
-    width:50%;
-    margin: auto;
+    width:80%;
+    margin: 1.2rem auto;
+    background-color:rgb(142, 202, 160);
+    box-shadow: 2px 3px 12px rgba(182, 180, 180, 0.397);
 }
-
+.subT{
+    padding:1rem;
+}
+.totalCarrito{
+    font-size: .9rem;
+    font-weight: 900;    
+    padding:.5rem;
+    margin:.5rem;
+}
 #cupon, #btnDescuento{
-    width:25%;
-    height:2rem;
-    padding:0.5rem;
+    width:38%;
+    height:3rem;
+    padding:0;
+    text-align: center;
+    box-shadow: 2px 3px 13px rgba(196, 193, 193, 0.158);
 }
-
 
 /* FORMULARIO */
 

@@ -8,7 +8,7 @@
     {"id":7, "categoria":"espejo", "nombre":"sahan","precio":6000, "img": "imagenes/milada-vigerova-pdZ2BwpLyis-unsplash.jpg"},  
     {"id":8, "categoria":"espejo", "nombre":"anton","precio":6000, "img": "imagenes/giorgio-trovato-EwKX1wH8Tyk-unsplash.jpg"},
     {"id":9, "categoria":"deco", "nombre":"anton","precio":6000, "img": "imagenes/josh-hemsley-VnYuKzrN82E-unsplash.jpg"},
-    {"id":10," categoria":"lampara", "nombre":"sahan","precio":6000, "img": "imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg"},
-    {"id":11," categoria":"lampara", "nombre":"anton","precio":6000, "img": "imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg"}
+    {"id":10,"categoria":"lampara", "nombre":"sahan","precio":6000, "img": "imagenes/patrick-schneider-mFnbFaCIu1I-unsplash.jpg"},
+    {"id":11,"categoria":"lampara", "nombre":"anton","precio":6000, "img": "imagenes/joel-henry-pdIwPL3HU2s-unsplash.jpg"}
   
   ]

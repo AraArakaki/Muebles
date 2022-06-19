@@ -3,7 +3,7 @@
 let barra= document.getElementById('top');
 let parrafo = document.createElement("p");
 parrafo.classList.add('pDesc')
-parrafo.innerHTML= "<p>Cupon de descuento <span>DESCUENTO10</span></p>";
+parrafo.innerHTML= "<p>Cupon de descuento <span>descuento10</span></p>";
 barra.appendChild(parrafo);
 
 // Botones
@@ -14,6 +14,10 @@ let abrirCarrito = () => document.getElementById("carrito").style.right = "0";
 const btncerrar = document.querySelector(".cerrar");
 btncerrar.onclick = () => cerrarCarrito();
 let cerrarCarrito = () => document.getElementById("carrito").style.right = "-100vw";
+
+// const drop = document.querySelector("#shopCategorias");
+// drop.onclick = () => dropNav();
+// let dropNav = () => document.getElementsByClassName("categorias").classList.add('show')
 
 const btnconfirmar = document.querySelector(".confirmar");
 btnconfirmar.addEventListener('click', ()=> {
@@ -42,11 +46,10 @@ function mostrarCatalogo(data){
       const contenedor= document.getElementById("galeria");
       contenedor.innerHTML+=`
                           <div class= "card">
-                            <img src= ${producto.img}>
+                            <img src= ${producto.img}><button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
                             <img src="imagenes/icons8-heart-24.png" class="wishlist">
                             <h3>${producto.categoria} ${producto.nombre}</h3>
-                            <p class="precioCard"> ${producto.precio}</p>
-                            <button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
+                            <p class="precioCard">$${producto.precio}</p>                           
                           </div>`
     });
 }
@@ -54,11 +57,12 @@ function mostrarCatalogo(data){
 let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
 function AgregarCarrito(id){
+  const cantidad = document.getElementsByClassName('cantidad').value;
+
   if (carrito.some((item) => item.id === id)) {
-    cantidad++
+    console.log(cantidad)
   } else {
     const item = productos.find((producto) => producto.id === id);
-
     carrito.push({
       ...item,
       cantidad: 1,
@@ -83,9 +87,9 @@ function mostrarCarritoItems(){
       const carroItem = document.createElement('li');
       carroItem.innerHTML+=
                             `<img class="imgCarrito" src="${item.img}" alt="">
-                            <p class="nombreItem">${item.categoria} ${item.nombre}</p>
-                            <input class="cantidad" type="number" value=1 onchage="('change',cambiarCantidades)">
-                            <p class="precioI">${item.precio}</p>
+                            <h4 class="nombreItem">${item.categoria} ${item.nombre}</h4>
+                            <p class="cantidad" id="${item.id}"> ${item.cantidad}</p>
+                            <p class="precioI">$${item.precio}</p>
                             <button class="eliminar" onclick="quitarItem(${item.id})">✗</button>`;
   
   carro.appendChild(carroItem);
@@ -102,22 +106,47 @@ function mostrarCarritoItems(){
 }
 actualizarCarrito();
 
+function quitarItem(id) {
+  carrito = carrito.filter((item) => item.id !== id);
+  actualizarCarrito();
+}
 
 
 function calcularTotal(){
-  var totales = 0;
+// SUBTOTAL
+  var subtotales = 0;
   carrito.forEach((item) => {
-    totales += item.precio ;
+    subtotales += item.precio ;
   });
-  var carroTotal = document.createElement('p');
-  carroTotal.innerText = `TOTAL $ ${totales} `
+  var carroSubTotal = document.createElement('p');
+  carroSubTotal.classList.add('subT');
+  carroSubTotal.innerText = `SUBTOTAL $ ` + subtotales  ;
+  carro.appendChild(carroSubTotal);
+
+// CUPON DESCUENTO
+function cupon(){
+  let cuponIn= document.getElementById("cupon")
+  if(cuponIn.value == "descuento10"){
+    descuento = subtotales * 0.10;
+    console.log(descuento)
+  }  else{
+    descuento=0;
+    alert("No existe el cupon "+ cuponIn.value)  
+  } 
+  actualizarCarrito()
+// TOTAL
+  if (subtotales > 0){
+  var total = "$ " + (subtotales - descuento);
+  var carroTotal = document.createElement('carritoTotal');
+  carroTotal.innerText = `TOTAL ${total} `;
+  carroTotal.classList.add('totalCarrito');
   carro.appendChild(carroTotal);
+  } 
+}
+const botonCupon = document.getElementById("btnDescuento")
+botonCupon.addEventListener('click', cupon);
 }
 
 
-function quitarItem(id) {
-  carrito = carrito.filter((item) => item.id !== id);
 
-  actualizarCarrito();
-}
 
