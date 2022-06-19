@@ -34,6 +34,7 @@ let vaciarCarrito = () => {
   mostrarCarritoItems();
 }
 
+
 //Fetch json catalogo de productos
  fetch("js/productos.json")
  .then((res) => res.json())
@@ -46,27 +47,43 @@ function mostrarCatalogo(data){
       const contenedor= document.getElementById("galeria");
       contenedor.innerHTML+=`
                           <div class= "card">
-                            <img src= ${producto.img}><button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
+                            <img src= ${producto.img}>
+                            <button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
                             <img src="imagenes/icons8-heart-24.png" class="wishlist">
                             <h3>${producto.categoria} ${producto.nombre}</h3>
                             <p class="precioCard">$${producto.precio}</p>                           
                           </div>`
     });
+    
+// const btnAgregado= document.getElementsByClassName('botonAddItem');
+// btnAgregado.addEventListener('click', () => {
+//       Toastify({
+//         text:'Producto agregado al carrito',
+//         duration: 3000,
+//         position:'right',
+//         style:{
+//           background:'rgb(108, 185, 199)'
+//         }
+//       }).showToast();
+//     })  
 }
+
 
 let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
 function AgregarCarrito(id){
-  const cantidad = document.getElementsByClassName('cantidad').value;
+  const cantidad = document.getElementsByClassName('cantidad');
 
-  if (carrito.some((item) => item.id === id)) {
-    console.log(cantidad)
+  if (carrito.some((item) => item.id === id && cantidad >= 1)) {
+      console.log(id)
+      
   } else {
     const item = productos.find((producto) => producto.id === id);
     carrito.push({
       ...item,
       cantidad: 1,
-    });
+    });      
+
   }
   actualizarCarrito();
 }
