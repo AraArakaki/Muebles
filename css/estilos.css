@@ -333,6 +333,7 @@ form{
     flex-direction: column;
     justify-content: space-evenly;
     text-align: left;
+    caret-color: rgb(108, 185, 199);
 }
 form input{
     height:2rem;
@@ -366,10 +367,15 @@ form label{
     border: 3px solid rgb(235, 149, 202);
 }
 
-a{
+#volver {
     color:black;
     text-decoration: none;
     display:inline-block;
+    padding-top: 2rem;
+}
+#volver:hover{
+    color:rgb(108, 185, 199);
+    font-weight: bold;
 }
 
 

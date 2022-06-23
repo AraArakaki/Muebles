@@ -48,7 +48,7 @@ function mostrarCatalogo(data){
       contenedor.innerHTML+=`
                           <div class= "card">
                             <img src= ${producto.img}>
-                            <button class="botonAddItem" onclick="AgregarCarrito(${producto.id})">Agregar al Carrito</button>
+                            <button class="botonAddItem" onclick="AgregarCarrito(${producto.id},${producto.cantidad})">Agregar al Carrito</button>
                             <img src="imagenes/icons8-heart-24.png" class="wishlist">
                             <h3>${producto.categoria} ${producto.nombre}</h3>
                             <p class="precioCard">$${producto.precio}</p>                           
@@ -71,11 +71,10 @@ function mostrarCatalogo(data){
 
 let carrito = JSON.parse(localStorage.getItem("CARRO")) || [];
 
-function AgregarCarrito(id){
-  const cantidad = document.getElementsByClassName('cantidad');
-
+function AgregarCarrito(id, cantidad){
+cantidad=document.getElementsByClassName('cantidad').value;
   if (carrito.some((item) => item.id === id && cantidad >= 1)) {
-    cantidad++;     
+    cantidad++;  
   } else {
     const item = productos.find((producto) => producto.id === id);
     carrito.push({
